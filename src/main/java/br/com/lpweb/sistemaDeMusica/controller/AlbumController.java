@@ -3,7 +3,6 @@ package br.com.lpweb.sistemaDeMusica.controller;
 
 import br.com.lpweb.sistemaDeMusica.model.Album;
 import br.com.lpweb.sistemaDeMusica.service.Interfaces.IAlbumService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 public class AlbumController {
 
 
-      @Autowired
+//      @Autowired
       private IAlbumService albumService;
 
 
       @GetMapping
       public ResponseEntity buscaAlbuns(){
             return ResponseEntity.ok().body(albumService.recuperaAlbuns());
+
       }
 
 
@@ -38,7 +38,7 @@ public class AlbumController {
 
       @DeleteMapping("/{id}")
       public ResponseEntity excluiAlbunmPor(@PathVariable Integer id){
-            albumService.excluiAlbum(id);
+            albumService.excluiAlbumPor(id);
             return ResponseEntity.status(HttpStatus.OK).build();
       }
 

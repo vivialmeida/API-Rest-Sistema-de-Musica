@@ -1,47 +1,42 @@
 package br.com.lpweb.sistemaDeMusica.service;
 
 import br.com.lpweb.sistemaDeMusica.model.Album;
-import br.com.lpweb.sistemaDeMusica.repository.IAlbumRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.lpweb.sistemaDeMusica.service.Interfaces.IAlbumService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
-public class AlbumService {
+public class AlbumService extends  GenericoService implements IAlbumService{
 
-      private IAlbumRepository albumRepository;
 
-      @Autowired
-      public AlbumService(IAlbumRepository albumRepository) {
-            this.albumRepository = albumRepository;
+      AlbumService(@Qualifier("IAlbumRepository") JpaRepository repository) {
+            super(repository);
       }
 
-
-      public List<Album>recuperaAlbuns(){
-            return  null;
+      @Override
+      public List<Album> recuperaAlbuns() {
+          return this.todos();
       }
 
-
-     public Album recuperaAlbumPor(Integer id){
-           return  null;
-
-     }
-
-      public void insereAlbum(Integer id){
-
+      @Override
+      public Album recuperaAlbumPor(Integer id) {
+            return (Album) this.buscaPor(id);
       }
 
-      public void excluiAlbum(Integer id){
-
+      @Override
+      public void insereAlbum(Album album) {
+            this.salva(album);
       }
 
-      public Album atualizaAlbum(Integer id){
-            return null;
+      @Override
+      public void excluiAlbumPor(Integer id) {
+                  this.excluirPor(id);
       }
 
-
-
-
-
+      @Override
+      public Album atualizaAlbum(Integer id) {
+           return (Album) this.atualiza(Album.class, id);
+      }
 }

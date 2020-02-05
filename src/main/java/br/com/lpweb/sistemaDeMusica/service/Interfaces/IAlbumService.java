@@ -1,9 +1,8 @@
 package br.com.lpweb.sistemaDeMusica.service.Interfaces;
-
 import br.com.lpweb.sistemaDeMusica.model.Album;
-import java.util.List;
 
-public interface IAlbumService {
+import java.util.List;
+public interface IAlbumService  {
 
        List<Album> recuperaAlbuns();
 
@@ -11,7 +10,7 @@ public interface IAlbumService {
 
        void insereAlbum(Album album);
 
-       void excluiAlbum(Integer id);
+       void excluiAlbumPor(Integer id);
 
        Album atualizaAlbum(Integer id);
 }

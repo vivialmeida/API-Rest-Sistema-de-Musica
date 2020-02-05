@@ -1,11 +1,8 @@
 package br.com.lpweb.sistemaDeMusica.model.handler;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @Builder
@@ -18,6 +15,4 @@ public class StandardError implements Serializable {
     int value;
     String message;
     String details;
-    @JsonFormat(pattern = "dd/mm/yyyy hh:mm:ss")
-    LocalDate currentTimeMillis;
 }

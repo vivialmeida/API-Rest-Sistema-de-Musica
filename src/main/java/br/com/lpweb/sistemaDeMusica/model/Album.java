@@ -16,12 +16,21 @@ public class Album {
       String nome;
       @Column(name = "ano")
       Integer ano;
-//      @OneToMany
-//      @Column(name = "participantes")
-//      List<Artista> participantes;
-//      @OneToMany
-//      @Column(name = "musicas")
-//      List<Musica> musicas;
+
+      @ManyToMany
+      @Column(name = "musicas")
+      List<Musica> musicas;
+
+      @ManyToMany(mappedBy = "albums")
+      @Column(name = "artistas")
+      List<Artista> participantes;
+
+      @ManyToMany(mappedBy = "albums")
+      @Column(name = "artistas")
+      List<Artista> interpretes;
+
+
+
 
 
 }

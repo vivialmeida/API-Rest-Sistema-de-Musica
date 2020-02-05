@@ -1,6 +1,4 @@
 package br.com.lpweb.sistemaDeMusica.controller;
-
-import br.com.lpweb.sistemaDeMusica.model.Artista;
 import br.com.lpweb.sistemaDeMusica.model.Musica;
 import br.com.lpweb.sistemaDeMusica.service.Interfaces.IMusicaService;
 import org.springframework.beans.factory.annotation.Autowired;

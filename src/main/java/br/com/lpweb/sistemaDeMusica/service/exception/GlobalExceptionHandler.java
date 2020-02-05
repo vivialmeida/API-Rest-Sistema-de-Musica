@@ -83,8 +83,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return  StandardError.builder()
                 .value(status.value())
                 .message(mensagem)
-                .details(request.getDescription(false))
-                .currentTimeMillis(LocalDate.now()).build();
+                .details(request.getDescription(false)).build();
     }
 
 }

@@ -15,14 +15,19 @@ public class Musica {
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       @Column(name = "musica_id")
       Integer id;
+
       @Column(name = "nome")
       String nome;
+
       @Column(name = "duracao")
       Time duracao;
-//      @OneToMany
-//      List<Artista> autores;
-//      @OneToMany
-//      List<Artista> interpretes;
+
+      @ManyToMany
+      @Column(name = "musicas_autores")
+      List<Artista> artistas;
+
+      @ManyToMany(mappedBy = "musicas")
+      List<Album> albums;
 
 
 }

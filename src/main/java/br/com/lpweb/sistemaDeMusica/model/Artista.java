@@ -3,6 +3,7 @@ package br.com.lpweb.sistemaDeMusica.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,6 +16,13 @@ public class Artista {
       String nome;
       @Column(name = "nacionalidade")
       String nacionalidade;
+
+      @ManyToMany(mappedBy = "artistas")
+      List<Musica> musicas;
+
+      @ManyToMany
+      List<Album> albums;
+
 
 
 

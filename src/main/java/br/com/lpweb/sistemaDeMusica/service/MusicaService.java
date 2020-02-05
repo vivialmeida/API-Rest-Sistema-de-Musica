@@ -1,42 +1,46 @@
 package br.com.lpweb.sistemaDeMusica.service;
+
 import br.com.lpweb.sistemaDeMusica.model.Musica;
-import br.com.lpweb.sistemaDeMusica.repository.IMusicaRepository;
+import br.com.lpweb.sistemaDeMusica.service.Interfaces.IMusicaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MusicaService {
-      private IMusicaRepository musicaRepository;
+public class MusicaService extends  GenericoService implements IMusicaService {
 
       @Autowired
-      public MusicaService(IMusicaRepository artistaRepositorya) {
-            this.musicaRepository = musicaRepository;
+      MusicaService(JpaRepository<Musica, Integer> repository) {
+            super(repository);
       }
 
 
-      public List<Musica> recuperaMusicas(){
-            return  null;
+      @Override
+      public List<Musica> recuperaMusicas() {
+           return this.todos();
       }
 
+      @Override
+      public Musica recuperaMusicaPor(Integer id) {
+            return (Musica) this.buscaPor(id);
+      }
 
-      public Musica recuperaMusicaPor(Integer id){
-            return  null;
+      @Override
+      public void insereMusica(Musica musica) {
+            this.salva(musica);
 
       }
 
-      public void insereMusica(Integer id){
-
+      @Override
+      public void excluiMusicaPor(Integer id) {
+            this.excluirPor(id);
       }
 
-      public void excluiMusica(Integer id){
-
+      @Override
+      public Musica atualizaMusica(Integer id) {
+           return (Musica) this.atualiza(Musica.class, id);
       }
-
-      public Musica atualizaMusica(Integer id){
-            return null;
-      }
-
 
 }

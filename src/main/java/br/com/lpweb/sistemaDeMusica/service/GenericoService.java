@@ -24,7 +24,6 @@ public class GenericoService<T> {
         return repository.findAll();
     }
 
-
     T atualiza(T entity, Integer id) {
         T entityDoBanco = this.buscaPor(id );
         BeanUtils.copyProperties(entity, entityDoBanco, "id" );

@@ -11,14 +11,18 @@ import java.util.List;
 @Entity
 @Table(name = "musica")
 public class Musica {
-      @Id @GeneratedValue
+      @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      @Column(name = "musica_id")
       Integer id;
+      @Column(name = "nome")
       String nome;
-      Time time;
-      @OneToMany
-      List<Artista> autores;
-      @OneToMany
-      List<Artista> interpretes;
+      @Column(name = "duracao")
+      Time duracao;
+//      @OneToMany
+//      List<Artista> autores;
+//      @OneToMany
+//      List<Artista> interpretes;
 
 
 }

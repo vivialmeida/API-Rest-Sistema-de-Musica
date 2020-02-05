@@ -14,8 +14,6 @@ import java.util.List;
 @Service
 public class ArtistaService extends GenericoService implements IArtistaService {
 
-      private IArtistaRepository  artistaRepository;
-
       @Autowired
       ArtistaService(@Qualifier("IArtistaRepository") JpaRepository repository) {
             super(repository);

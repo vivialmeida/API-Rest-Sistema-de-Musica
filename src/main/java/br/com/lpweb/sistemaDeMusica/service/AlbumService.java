@@ -1,8 +1,8 @@
 package br.com.lpweb.sistemaDeMusica.service;
 
 import br.com.lpweb.sistemaDeMusica.model.Album;
+import br.com.lpweb.sistemaDeMusica.model.Musica;
 import br.com.lpweb.sistemaDeMusica.service.Interfaces.IAlbumService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 public class AlbumService extends  GenericoService implements IAlbumService{
 
 
-      AlbumService(@Qualifier("IAlbumRepository") JpaRepository repository) {
+      AlbumService(JpaRepository<Musica, Integer> repository) {
             super(repository);
       }
 

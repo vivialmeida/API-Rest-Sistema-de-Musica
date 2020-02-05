@@ -3,44 +3,45 @@ package br.com.lpweb.sistemaDeMusica.service;
 import br.com.lpweb.sistemaDeMusica.model.Album;
 import br.com.lpweb.sistemaDeMusica.model.Artista;
 import br.com.lpweb.sistemaDeMusica.repository.IArtistaRepository;
+import br.com.lpweb.sistemaDeMusica.service.Interfaces.IArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ArtistaService {
+public class ArtistaService extends GenericoService implements IArtistaService {
 
       private IArtistaRepository  artistaRepository;
 
       @Autowired
-      public ArtistaService(IArtistaRepository artistaRepositorya) {
-            this.artistaRepository = artistaRepositorya;
+      ArtistaService(@Qualifier("IArtistaRepository") JpaRepository repository) {
+            super(repository);
       }
 
 
-      public List<Album> recuperaArtistas(){
-            return  null;
+      public List<Artista> recuperaArtistas(){
+          return  this.todos();
       }
-
 
       public Artista recuperaArtistaPor(Integer id){
-            return  null;
+            return (Artista) this.buscaPor(id);
 
       }
 
-      public void insereAlbum(Integer id){
-
+      public void insereArtista(Artista artista){
+            this.salva(artista);
       }
 
-      public void excluiAlbum(Integer id){
-
+      public void excluiArtistaPor(Integer id){
+            this.excluirPor(id);
       }
 
       public Artista atualizaArtista(Integer id){
-            return null;
+           return (Artista) this.atualiza(Artista.class, id);
       }
-
 
 
 }

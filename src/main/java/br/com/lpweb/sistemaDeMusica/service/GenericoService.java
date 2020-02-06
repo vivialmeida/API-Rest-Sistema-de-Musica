@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public class GenericoService<T> {
+public abstract  class GenericoService<T> {
 
     private final JpaRepository<T, Integer> repository;
 

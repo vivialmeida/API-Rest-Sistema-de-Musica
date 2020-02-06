@@ -21,7 +21,6 @@ public class AlbumController {
       @GetMapping
       public ResponseEntity buscaAlbuns(){
             return ResponseEntity.ok().body(albumService.recuperaAlbuns());
-
       }
 
 
@@ -44,8 +43,8 @@ public class AlbumController {
       }
 
       @PutMapping("/{id}")
-      public ResponseEntity atualizaAlbum(@PathVariable Integer id){
-            return ResponseEntity.ok().body(albumService.atualizaAlbum(id));
+      public ResponseEntity atualizaAlbum(@PathVariable Integer id, @RequestBody Album album){
+            return ResponseEntity.ok().body(albumService.atualizaAlbum(album, id));
       }
 
 

@@ -39,8 +39,8 @@ public class MusicaService extends  GenericoService implements IMusicaService {
       }
 
       @Override
-      public Musica atualizaMusica(Integer id) {
-           return (Musica) this.atualiza(Musica.class, id);
+      public Musica atualizaMusica(Musica musica , Integer id) {
+           return (Musica) this.atualiza(musica, id);
       }
 
 }

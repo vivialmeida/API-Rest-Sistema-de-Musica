@@ -39,8 +39,8 @@ public class ArtistaController {
       }
 
       @PutMapping("/{id}")
-      public ResponseEntity atualizaAlbum(@PathVariable Integer id){
-            return ResponseEntity.ok().body(artistaService.atualizaArtista(id));
+      public ResponseEntity atualizaAlbum(@PathVariable Integer id, @RequestBody Artista artista){
+            return ResponseEntity.ok().body(artistaService.atualizaArtista(artista, id ));
       }
 
 

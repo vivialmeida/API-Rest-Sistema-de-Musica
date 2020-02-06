@@ -36,7 +36,7 @@ public class AlbumService extends  GenericoService implements IAlbumService{
       }
 
       @Override
-      public Album atualizaAlbum(Integer id) {
-           return (Album) this.atualiza(Album.class, id);
+      public Album atualizaAlbum(Album album, Integer id) {
+           return (Album) this.atualiza(album, id);
       }
 }

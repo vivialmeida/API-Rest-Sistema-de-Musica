@@ -37,8 +37,8 @@ public class ArtistaService extends GenericoService implements IArtistaService {
             this.excluirPor(id);
       }
 
-      public Artista atualizaArtista(Integer id){
-           return (Artista) this.atualiza(Artista.class, id);
+      public Artista atualizaArtista( Artista artista, Integer id){
+           return (Artista) this.atualiza(artista, id);
       }
 
 

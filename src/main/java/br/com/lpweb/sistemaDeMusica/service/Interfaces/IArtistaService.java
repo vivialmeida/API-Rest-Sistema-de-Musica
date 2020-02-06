@@ -13,5 +13,5 @@ public interface IArtistaService {
 
        void excluiArtistaPor(Integer id);
 
-       Artista atualizaArtista(Integer id);
+       Artista atualizaArtista(Artista artista,Integer id);
 }

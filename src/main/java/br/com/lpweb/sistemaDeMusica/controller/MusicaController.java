@@ -38,9 +38,9 @@ public class MusicaController {
       }
 
       @PutMapping("/{id}")
-      public ResponseEntity atualizaAlbum(@PathVariable Integer id){
+      public ResponseEntity atualizaAlbum(@PathVariable Integer id, @RequestBody Musica musica){
 
-            return ResponseEntity.ok().body(musicaService.atualizaMusica(id));
+            return ResponseEntity.ok().body(musicaService.atualizaMusica(musica, id));
       }
 
 

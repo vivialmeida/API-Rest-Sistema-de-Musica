@@ -1,7 +1,6 @@
 package br.com.lpweb.sistemaDeMusica.model;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.List;
@@ -20,14 +19,15 @@ public class Musica {
       String nome;
 
       @Column(name = "duracao")
+
       Time duracao;
-
-      @ManyToMany
-      @Column(name = "musicas_autores")
-      List<Artista> artistas;
-
-      @ManyToMany(mappedBy = "musicas")
-      List<Album> albums;
+//
+//      @ManyToMany (mappedBy = "musicas")
+//      @Column(name = "artistas")
+//      List<Artista> artistas;
+//
+//      @ManyToMany(mappedBy = "musicas")
+//      List<Album> albums;
 
 
 }

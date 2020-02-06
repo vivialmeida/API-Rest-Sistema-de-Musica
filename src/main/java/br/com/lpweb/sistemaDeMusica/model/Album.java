@@ -17,17 +17,17 @@ public class Album {
       @Column(name = "ano")
       Integer ano;
 
-      @ManyToMany
-      @Column(name = "musicas")
-      List<Musica> musicas;
-
-      @ManyToMany(mappedBy = "albums")
-      @Column(name = "artistas")
-      List<Artista> participantes;
-
-      @ManyToMany(mappedBy = "albums")
-      @Column(name = "artistas")
-      List<Artista> interpretes;
+//      @ManyToMany
+//      @Column(name = "musicas")
+//      List<Musica> musicas;
+//
+//      @ManyToMany
+//      @Column(name = "artistas")
+//      List<Artista> participantes;
+//
+//      @ManyToMany(mappedBy = "albums")
+//      @Column(name = "artistas")
+//      List<Artista> interpretes;
 
 
 

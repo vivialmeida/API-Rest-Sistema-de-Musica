@@ -17,11 +17,12 @@ public class Artista {
       @Column(name = "nacionalidade")
       String nacionalidade;
 
-      @ManyToMany(mappedBy = "artistas")
-      List<Musica> musicas;
-
-      @ManyToMany
-      List<Album> albums;
+//      @ManyToMany
+//      @Column(name = "musicas")
+//      List<Musica> musicas;
+//
+//      @ManyToMany
+//      List<Album> albums;
 
 
 

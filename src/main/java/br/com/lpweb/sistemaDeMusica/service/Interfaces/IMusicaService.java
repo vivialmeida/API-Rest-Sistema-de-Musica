@@ -14,5 +14,5 @@ public interface IMusicaService {
 
        void excluiMusicaPor(Integer id);
 
-       Musica atualizaMusica(Integer id);
+       Musica atualizaMusica(Musica musica , Integer id);
 }

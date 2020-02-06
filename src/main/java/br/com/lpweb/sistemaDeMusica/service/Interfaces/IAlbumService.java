@@ -12,5 +12,5 @@ public interface IAlbumService  {
 
        void excluiAlbumPor(Integer id);
 
-       Album atualizaAlbum(Integer id);
+       Album atualizaAlbum(Album album,Integer id);
 }

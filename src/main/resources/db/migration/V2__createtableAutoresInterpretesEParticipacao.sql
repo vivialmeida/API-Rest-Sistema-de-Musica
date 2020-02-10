@@ -2,7 +2,7 @@
 CREATE TABLE autorias (
   id_artista INT NOT NULL,
   id_musica INT NOT NULL,
---   PRIMARY KEY (id_artista, id_musica),
+  PRIMARY KEY (id_artista, id_musica),
   foreign key(id_artista) references artistas(artista_id),
   foreign key(id_musica) references musicas(musica_id)
 ) ;

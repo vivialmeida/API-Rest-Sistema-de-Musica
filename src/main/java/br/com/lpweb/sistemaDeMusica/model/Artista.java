@@ -1,8 +1,11 @@
 package br.com.lpweb.sistemaDeMusica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -13,6 +16,8 @@ public class Artista {
       @Column(name = "artista_id")
       Integer id;
 
+      @NotEmpty
+      @NotNull
       String nome;
 
       String nacionalidade;
@@ -23,7 +28,7 @@ public class Artista {
           joinColumns = @JoinColumn(name = "id_artista"),
           inverseJoinColumns = @JoinColumn(name = "id_musica")
       )
-
+//      @JsonIgnore
       private List<Musica> autorias;
 
       @ManyToMany
@@ -32,6 +37,7 @@ public class Artista {
           joinColumns = @JoinColumn(name = "id_artista"),
           inverseJoinColumns = @JoinColumn(name = "id_musica")
       )
+//      @JsonIgnore
       private List<Musica> interpretacoes;
 
       @ManyToMany
@@ -40,6 +46,7 @@ public class Artista {
           joinColumns = @JoinColumn(name = "id_artista"),
           inverseJoinColumns = @JoinColumn(name = "id_album")
       )
+//      @JsonIgnore
       private List<Musica> participacoes;
 
 

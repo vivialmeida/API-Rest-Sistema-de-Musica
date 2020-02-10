@@ -3,7 +3,7 @@ import br.com.lpweb.sistemaDeMusica.model.Artista;
 
 import java.util.List;
 
-public interface IArtistaService {
+public interface     IArtistaService {
 
        List<Artista> recuperaArtistas();
 

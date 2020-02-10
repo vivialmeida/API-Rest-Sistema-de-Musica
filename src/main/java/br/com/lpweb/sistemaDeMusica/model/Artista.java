@@ -23,6 +23,7 @@ public class Artista {
           joinColumns = @JoinColumn(name = "id_artista"),
           inverseJoinColumns = @JoinColumn(name = "id_musica")
       )
+
       private List<Musica> autorias;
 
       @ManyToMany
@@ -35,7 +36,7 @@ public class Artista {
 
       @ManyToMany
       @JoinTable(
-          name="participacoes",
+          name="albuns_participantes",
           joinColumns = @JoinColumn(name = "id_artista"),
           inverseJoinColumns = @JoinColumn(name = "id_album")
       )

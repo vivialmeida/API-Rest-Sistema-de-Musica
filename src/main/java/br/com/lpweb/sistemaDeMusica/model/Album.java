@@ -21,7 +21,6 @@ public class Album {
       List<Musica> musicas;
 
       @ManyToMany
-      @Column(name = "participantes")
       List<Artista> participantes;
 
 }

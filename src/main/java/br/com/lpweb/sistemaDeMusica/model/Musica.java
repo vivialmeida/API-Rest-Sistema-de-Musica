@@ -1,5 +1,6 @@
 package br.com.lpweb.sistemaDeMusica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 import java.sql.Time;
@@ -28,6 +29,7 @@ public class Musica {
       @ManyToMany(mappedBy = "autorias")
       private List<Artista> autores ;
 
+      @JsonIgnore
       @ManyToMany(mappedBy = "musicas")
       private List<Album> albuns;
 

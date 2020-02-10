@@ -1,6 +1,0 @@
--- CREATE TABLE IF NOT EXISTS  artista_musicas(
---       musica_id int not null,
---      artista_id int not null,
---      PRIMARY KEY (musica_id, artista_id)
--- );
---

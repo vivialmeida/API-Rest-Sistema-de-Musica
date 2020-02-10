@@ -13,7 +13,7 @@ import java.util.List;
 public class AlbumService extends  GenericoService implements IAlbumService{
 
 
-      AlbumService(JpaRepository<Musica, Integer> repository) {
+      AlbumService(JpaRepository<Album, Integer> repository) {
             super(repository);
       }
 

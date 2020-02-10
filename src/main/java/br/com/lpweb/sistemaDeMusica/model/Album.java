@@ -1,36 +1,27 @@
 package br.com.lpweb.sistemaDeMusica.model;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "album")
+@Table(name = "albuns")
 public class Album {
       @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
       @Column(name = "album_id")
       Integer id;
-      @Column(name = "nome")
       String nome;
-      @Column(name = "ano")
       Integer ano;
 
-//      @ManyToMany
-//      @Column(name = "musicas")
-//      List<Musica> musicas;
-//
-//      @ManyToMany
-//      @Column(name = "artistas")
-//      List<Artista> participantes;
-//
-//      @ManyToMany(mappedBy = "albums")
-//      @Column(name = "artistas")
-//      List<Artista> interpretes;
+      @ManyToMany
+      @JoinTable( name = "album_musica",
+      joinColumns = @JoinColumn(name = "id_album"),
+          inverseJoinColumns = @JoinColumn(name = "id_musica"))
+      List<Musica> musicas;
 
-
-
-
+      @ManyToMany
+      @Column(name = "participantes")
+      List<Artista> participantes;
 
 }

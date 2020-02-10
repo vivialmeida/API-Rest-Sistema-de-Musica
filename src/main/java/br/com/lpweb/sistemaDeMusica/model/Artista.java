@@ -7,28 +7,39 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "artista")
+@Table(name = "artistas")
 public class Artista {
       @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
       @Column(name = "artista_id")
       Integer id;
-      @Column(name = "nome")
+
       String nome;
-      @Column(name = "nacionalidade")
+
       String nacionalidade;
 
-//      @ManyToMany
-//      @Column(name = "musicas")
-//      List<Musica> musicas;
-//
-//      @ManyToMany
-//      List<Album> albums;
+      @ManyToMany
+      @JoinTable(
+          name="autorias",
+          joinColumns = @JoinColumn(name = "id_artista"),
+          inverseJoinColumns = @JoinColumn(name = "id_musica")
+      )
+      private List<Musica> autorias;
 
+      @ManyToMany
+      @JoinTable(
+          name="interpretacoes",
+          joinColumns = @JoinColumn(name = "id_artista"),
+          inverseJoinColumns = @JoinColumn(name = "id_musica")
+      )
+      private List<Musica> interpretacoes;
 
-
-
-
-
+      @ManyToMany
+      @JoinTable(
+          name="participacoes",
+          joinColumns = @JoinColumn(name = "id_artista"),
+          inverseJoinColumns = @JoinColumn(name = "id_album")
+      )
+      private List<Musica> participacoes;
 
 
 

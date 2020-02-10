@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "musica")
+@Table(name = "musicas")
 public class Musica {
       @Id
       @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +21,14 @@ public class Musica {
       @Column(name = "duracao")
 
       Time duracao;
-//
-//      @ManyToMany (mappedBy = "musicas")
-//      @Column(name = "artistas")
-//      List<Artista> artistas;
-//
-//      @ManyToMany(mappedBy = "musicas")
-//      List<Album> albums;
 
+      @ManyToMany(mappedBy = "interpretacoes")
+      private List<Artista> interpretes ;
+
+      @ManyToMany(mappedBy = "autorias")
+      private List<Artista> autores ;
+
+      @ManyToMany(mappedBy = "musicas")
+      private List<Album> albuns;
 
 }

@@ -7,16 +7,16 @@ CREATE TABLE IF NOT EXISTS  Albuns (
 );
 
 CREATE TABLE IF NOT EXISTS  Musicas(
-                              musica_id  serial not null ,
+                              musica_id  serial  ,
                               nome varchar(100)  not null ,
-                              duracao time,
+                              duracao int,
                               primary key (musica_id)
 
 
 );
 
 CREATE TABLE IF NOT EXISTS  Artistas (
-                                artista_id  serial not null ,
+                                artista_id  serial  ,
                                 nome varchar(100)  not null ,
                                 nacionalidade varchar(45),
                                 primary key (artista_id)

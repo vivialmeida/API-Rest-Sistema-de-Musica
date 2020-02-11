@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public abstract  class GenericoService<T> {
+public  class GenericoService<T> {
 
     private final JpaRepository<T, Integer> repository;
 
@@ -25,7 +25,7 @@ public abstract  class GenericoService<T> {
     }
 
     T atualiza(T entity, Integer id) {
-        T entityDoBanco = this.buscaPor(id );
+        T entityDoBanco= this.buscaPor(id );
         BeanUtils.copyProperties(entity, entityDoBanco, "id" );
 
         return entityDoBanco;

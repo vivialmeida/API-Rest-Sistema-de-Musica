@@ -42,12 +42,12 @@ public class Artista {
 
       @ManyToMany
       @JoinTable(
-          name="albuns_participantes",
+          name="participacoes",
           joinColumns = @JoinColumn(name = "id_artista"),
           inverseJoinColumns = @JoinColumn(name = "id_album")
       )
 //      @JsonIgnore
-      private List<Musica> participacoes;
+      private List<Album> albums;
 
 
 

@@ -21,9 +21,20 @@ public class ArtistaController {
       }
 
       @GetMapping("/{id}")
-      public ResponseEntity buscaArtistaPor(@PathVariable Integer id){
+      public ResponseEntity buscaArtistaPor(@RequestParam(value = "id") Integer id){
             return ResponseEntity.ok().body(artistaService.recuperaArtistaPor(id));
       }
+      @GetMapping("/{nome}")
+      public ResponseEntity recuperaArtistaPor(@RequestParam(value = "nome") String nome){
+            return ResponseEntity.ok().body(artistaService.recuperaArtistaPorNome(nome));
+      }
+
+
+      @GetMapping("/{nacionalidade}")
+      public ResponseEntity recuperaArtistaPorNacionalidade(@RequestParam(value = "nacionalidade") String nacionalidade){
+            return ResponseEntity.ok().body(artistaService.recuperaArtistaPorNacionalidade(nacionalidade));
+      }
+
 
       @PostMapping
       public ResponseEntity InsereArtista(@RequestBody Artista artista){

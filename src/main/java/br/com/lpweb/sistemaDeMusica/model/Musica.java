@@ -7,8 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -32,9 +31,10 @@ public class Musica {
       String nome;
 
       @NotNull
-      @JsonFormat(pattern = "mm:ss")
+      @Min(1)
+      @Max(20)
       @Column(name = "duracao")
-      String duracao;
+      Integer duracao;
 
       @ManyToMany(mappedBy = "interpretacoes")
       @JsonIgnore

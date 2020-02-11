@@ -1,32 +1,28 @@
 package br.com.lpweb.sistemaDeMusica.controller;
 import br.com.lpweb.sistemaDeMusica.model.Musica;
-import br.com.lpweb.sistemaDeMusica.repository.filtro.MusicaFiltro;
 import br.com.lpweb.sistemaDeMusica.service.Interfaces.IMusicaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping("/musica")
 public class MusicaController {
 
+
+      private final IMusicaService musicaService;
+
       @Autowired
-      private IMusicaService musicaService;
+      public MusicaController(IMusicaService musicaService) {
+            this.musicaService = musicaService;
+      }
 
-
-//      @GetMapping
-//      public ResponseEntity buscaArtista(){
-//            return ResponseEntity.ok().body(musicaService.recuperaMusicas());
-//      }
 
       @GetMapping
-      public ResponseEntity<Page<Musica>> busca(MusicaFiltro filtro, Pageable page  ) {
-            Page<Musica> musica = musicaService.busca(filtro, page );
-            return ResponseEntity.ok(musica );
+      public ResponseEntity buscaArtista(){
+            return ResponseEntity.ok().body(musicaService.recuperaMusicas());
       }
 
       @GetMapping("/{id}")

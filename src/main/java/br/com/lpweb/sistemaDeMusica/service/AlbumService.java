@@ -1,49 +1,60 @@
 package br.com.lpweb.sistemaDeMusica.service;
 
 import br.com.lpweb.sistemaDeMusica.model.Album;
-import br.com.lpweb.sistemaDeMusica.model.Musica;
-import br.com.lpweb.sistemaDeMusica.service.Interfaces.IAlbumService;
-import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.lpweb.sistemaDeMusica.repository.IAlbumRepository;
+import br.com.lpweb.sistemaDeMusica.repository.filtro.AlbumFiltro;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
-public class AlbumService extends  GenericoService implements IAlbumService{
+public class AlbumService {
 
+      private final GenericoService<Album> genericoService;
 
-      AlbumService(JpaRepository<Album, Integer> repository) {
-            super(repository);
+      private final IAlbumRepository albumRepository;
+
+      @Autowired
+      AlbumService(IAlbumRepository albumRepository) {
+            this.albumRepository = albumRepository;
+            this.genericoService = new GenericoService<>(albumRepository);
       }
 
-      @Override
+
+      @Transactional(readOnly = true)
+      public Page<Album> busca(AlbumFiltro filtro, Pageable pageable) {
+            return albumRepository.filtrar(filtro, pageable );
+      }
+
+
       @Transactional(readOnly = true)
       public List<Album> recuperaAlbuns() {
-          return this.todos();
+          return genericoService.todos();
       }
 
-      @Override
+
       @Transactional(readOnly = true)
       public Album recuperaAlbumPor(Integer id) {
-            return (Album) this.buscaPor(id);
+            return genericoService.buscaPor(id);
       }
 
-      @Override
+
       @Transactional
       public void insereAlbum(Album album) {
-            this.salva(album);
+            genericoService.salva(album);
       }
 
-      @Override
+
       @Transactional
       public void excluiAlbumPor(Integer id) {
-                  this.excluirPor(id);
+            genericoService.excluirPor(id);
       }
 
-      @Override
       @Transactional
       public Album atualizaAlbum(Album album, Integer id) {
-           return (Album) this.atualiza(album, id);
+           return (Album) genericoService.atualiza(album, id);
       }
 }

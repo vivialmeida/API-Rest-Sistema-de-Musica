@@ -1,19 +1,19 @@
 package br.com.lpweb.sistemaDeMusica.service;
 
+import br.com.lpweb.sistemaDeMusica.model.Album;
 import br.com.lpweb.sistemaDeMusica.model.Artista;
-import br.com.lpweb.sistemaDeMusica.model.Musica;
+import br.com.lpweb.sistemaDeMusica.model.AlbumDTO;
 import br.com.lpweb.sistemaDeMusica.repository.IArtistaRepository;
-import br.com.lpweb.sistemaDeMusica.repository.IMusicaRepository;
-import br.com.lpweb.sistemaDeMusica.service.Interfaces.IArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.bind.ValidationException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ArtistaService implements IArtistaService {
-
+public class ArtistaService {
 
       GenericoService<Artista> genericoService;
 
@@ -30,12 +30,13 @@ public class ArtistaService implements IArtistaService {
       }
 
       @Transactional(readOnly = true)
-      public List<Artista> recuperaArtistaPorNome(String nome){
+      public Optional<List<Artista>> recuperaArtistaPorNome(String nome){
             return artistaRepository.findByNome(nome);
       }
 
       @Transactional(readOnly = true)
-      public List<Artista> recuperaArtistaPorNacionalidade(String nacionalidade){
+      public Optional<List<Artista>>recuperaArtistaPorNacionalidade(String nacionalidade){
+            System.out.println(nacionalidade);
             return artistaRepository.findByNacionalidade(nacionalidade);
       }
 
@@ -57,6 +58,7 @@ public class ArtistaService implements IArtistaService {
       public Artista atualizaArtista( Artista artista, Integer id){
            return genericoService.atualiza(artista, id);
       }
+
 
 
 }

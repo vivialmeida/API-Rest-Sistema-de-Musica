@@ -22,16 +22,15 @@ public class Artista {
 
       String nacionalidade;
 
-      @ManyToMany
+      @ManyToMany(cascade = CascadeType.ALL)
       @JoinTable(
           name="autorias",
           joinColumns = @JoinColumn(name = "id_artista"),
           inverseJoinColumns = @JoinColumn(name = "id_musica")
       )
-//      @JsonIgnore
       private List<Musica> autorias;
 
-      @ManyToMany
+      @ManyToMany(cascade = CascadeType.ALL)
       @JoinTable(
           name="interpretacoes",
           joinColumns = @JoinColumn(name = "id_artista"),
@@ -40,7 +39,7 @@ public class Artista {
 //      @JsonIgnore
       private List<Musica> interpretacoes;
 
-      @ManyToMany
+      @ManyToMany(cascade = CascadeType.ALL)
       @JoinTable(
           name="participacoes",
           joinColumns = @JoinColumn(name = "id_artista"),

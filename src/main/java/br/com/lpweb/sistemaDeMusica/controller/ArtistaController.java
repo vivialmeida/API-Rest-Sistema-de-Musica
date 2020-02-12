@@ -1,7 +1,7 @@
 package br.com.lpweb.sistemaDeMusica.controller;
 
 import br.com.lpweb.sistemaDeMusica.model.Artista;
-import br.com.lpweb.sistemaDeMusica.service.Interfaces.IArtistaService;
+import br.com.lpweb.sistemaDeMusica.service.ArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class ArtistaController {
 
       @Autowired
-      private IArtistaService artistaService;
-
+      private ArtistaService artistaService;
 
       @GetMapping
       public ResponseEntity buscaArtista(){
@@ -21,17 +20,16 @@ public class ArtistaController {
       }
 
       @GetMapping("/{id}")
-      public ResponseEntity buscaArtistaPor(@RequestParam(value = "id") Integer id){
+      public ResponseEntity buscaArtistaPor(@PathVariable Integer id){
             return ResponseEntity.ok().body(artistaService.recuperaArtistaPor(id));
       }
-      @GetMapping("/{nome}")
-      public ResponseEntity recuperaArtistaPor(@RequestParam(value = "nome") String nome){
+      @GetMapping("/nome")
+      public ResponseEntity recuperaArtistaPor(@RequestParam("nome") String nome){
             return ResponseEntity.ok().body(artistaService.recuperaArtistaPorNome(nome));
       }
 
-
-      @GetMapping("/{nacionalidade}")
-      public ResponseEntity recuperaArtistaPorNacionalidade(@RequestParam(value = "nacionalidade") String nacionalidade){
+      @GetMapping("/nacionalidade")
+      public ResponseEntity recuperaArtistaPorNacionalidade(@RequestParam("nacionalidade")  String nacionalidade){
             return ResponseEntity.ok().body(artistaService.recuperaArtistaPorNacionalidade(nacionalidade));
       }
 

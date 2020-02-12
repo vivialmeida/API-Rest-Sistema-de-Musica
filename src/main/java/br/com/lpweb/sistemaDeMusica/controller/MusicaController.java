@@ -1,6 +1,6 @@
 package br.com.lpweb.sistemaDeMusica.controller;
 import br.com.lpweb.sistemaDeMusica.model.Musica;
-import br.com.lpweb.sistemaDeMusica.service.Interfaces.IMusicaService;
+import br.com.lpweb.sistemaDeMusica.service.MusicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,21 +12,21 @@ import javax.validation.Valid;
 public class MusicaController {
 
 
-      private final IMusicaService musicaService;
+      private final MusicaService musicaService;
 
       @Autowired
-      public MusicaController(IMusicaService musicaService) {
+      public MusicaController(MusicaService musicaService) {
             this.musicaService = musicaService;
       }
 
 
       @GetMapping
-      public ResponseEntity buscaArtista(){
+      public ResponseEntity buscaMusicas(){
             return ResponseEntity.ok().body(musicaService.recuperaMusicas());
       }
 
       @GetMapping("/{id}")
-      public ResponseEntity buscaArtistaPor(@PathVariable Integer id){
+      public ResponseEntity buscaMusicaPor(@PathVariable Integer id){
             return ResponseEntity.ok().body(musicaService.recuperaMusicaPor(id));
       }
 

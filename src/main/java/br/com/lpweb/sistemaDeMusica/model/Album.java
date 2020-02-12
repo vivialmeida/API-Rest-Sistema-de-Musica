@@ -21,7 +21,7 @@ public class Album {
       @NotNull
       Integer ano;
 
-      @ManyToMany
+      @ManyToMany(cascade = CascadeType.ALL)
       @JoinTable( name = "album_musica",
       joinColumns = @JoinColumn(name = "id_album"),
           inverseJoinColumns = @JoinColumn(name = "id_musica"))
@@ -33,7 +33,7 @@ public class Album {
 
 
 
-
+      @JsonIgnore
       public Integer getDuracaoTotalAbum(){
            AtomicReference<Integer> duracaoTotal = new AtomicReference<>(new Integer(0));
             musicas.forEach(musica ->

@@ -1,11 +1,18 @@
 package br.com.lpweb.sistemaDeMusica.controller;
 
+import br.com.lpweb.sistemaDeMusica.controller.validacao.Validacao;
 import br.com.lpweb.sistemaDeMusica.model.Artista;
+import br.com.lpweb.sistemaDeMusica.model.handler.Resposta;
+import br.com.lpweb.sistemaDeMusica.model.handler.StandardError;
 import br.com.lpweb.sistemaDeMusica.service.ArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/artista")
@@ -15,8 +22,8 @@ public class ArtistaController {
       private ArtistaService artistaService;
 
       @GetMapping
-      public ResponseEntity buscaArtista(){
-            return ResponseEntity.ok().body(artistaService.recuperaArtistas());
+      public Resposta<List<Artista>> buscaArtista(){
+            return Resposta.comDadosDe(artistaService.recuperaArtistas());
       }
 
       @GetMapping("/{id}")
@@ -27,31 +34,41 @@ public class ArtistaController {
       public ResponseEntity recuperaArtistaPor(@RequestParam("nome") String nome){
             return ResponseEntity.ok().body(artistaService.recuperaArtistaPorNome(nome));
       }
-
       @GetMapping("/nacionalidade")
       public ResponseEntity recuperaArtistaPorNacionalidade(@RequestParam("nacionalidade")  String nacionalidade){
             return ResponseEntity.ok().body(artistaService.recuperaArtistaPorNacionalidade(nacionalidade));
       }
 
-
       @PostMapping
-      public ResponseEntity InsereArtista(@RequestBody Artista artista){
-            artistaService.insereArtista(artista);
-            return ResponseEntity.ok().body(artistaService.recuperaArtistas());
+      public ResponseEntity<Resposta<Artista>>  InsereArtista(@Valid  @RequestBody Artista artista){
+           Artista artistaSalvo = artistaService.insereArtista(artista);
+            return ResponseEntity.ok().body(Resposta.comDadosDe(artistaSalvo));
       }
 
 
       @DeleteMapping("/{id}")
-      public ResponseEntity excluiArtistaPor(@PathVariable Integer id){
+      @ResponseStatus(HttpStatus.NO_CONTENT)
+      public void excluiArtistaPor(@PathVariable Integer id){
             artistaService.excluiArtistaPor(id);
-            return ResponseEntity.status(HttpStatus.OK).build();
       }
 
       @PutMapping("/{id}")
-      public ResponseEntity atualizaAlbum(@PathVariable Integer id, @RequestBody Artista artista){
-            return ResponseEntity.ok().body(artistaService.atualizaArtista(artista, id ));
+      public ResponseEntity<Resposta<Artista>> atualizaArtista(@PathVariable Integer id, @RequestBody Artista artista){
+            Artista artistaAtualizado = artistaService.atualizaArtista(artista, id );
+            List<StandardError> erros = this.getErros(artistaAtualizado);
+            if (existe(erros)) {
+                  return ResponseEntity.badRequest().body(Resposta.com(erros) );
+            }
+            return ResponseEntity.ok().body(Resposta.comDadosDe(artistaAtualizado));
       }
 
+      private boolean existe(List<StandardError> erros) {
+            return Objects.nonNull( erros ) &&  !erros.isEmpty();
+      }
 
+      private List<StandardError> getErros(Artista artista) {
+            Validacao<Artista> validacao = new Validacao<>();
+            return validacao.valida(artista);
+      }
 
 }

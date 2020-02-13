@@ -25,21 +25,15 @@ public class AlbumController {
       }
 
 
-      @GetMapping
-      public ResponseEntity busca(AlbumFiltro filtro, Pageable page  ) {
+      @GetMapping("/filtro")
+      public ResponseEntity busca(@RequestBody  AlbumFiltro filtro, Pageable page  ) {
              return ResponseEntity.ok().body(albumService.busca(filtro, page ));
       }
 
-//      @GetMapping("/{id}")
-//      public ResponseEntity buscaAlbumPor(@PathVariable Integer id){
-//            return ResponseEntity.ok().body(albumService.recuperaAlbumPor(id));
-//      }
-
-
-//      @GetMapping("/album")
-//      public ResponseEntity buscaAlbumPor(@RequestParam("album") String album) throws ValidationException {
-//            return ResponseEntity.ok().body(albumService.ArtistaPorAlbum(album));
-//      }
+      @GetMapping("/{id}")
+      public ResponseEntity buscaAlbumPor(@PathVariable Integer id){
+            return ResponseEntity.ok().body(albumService.recuperaAlbumPor(id));
+      }
 
 
       @PostMapping

@@ -26,13 +26,12 @@ public class Musica {
       Integer id;
 
       @Column(name = "nome")
-      @NotEmpty
-      @NotNull
+      @NotBlank
       String nome;
 
       @NotNull
       @Min(1)
-      @Max(20)
+      @Max(15)
       @Column(name = "duracao")
       Integer duracao;
 

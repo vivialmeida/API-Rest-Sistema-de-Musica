@@ -3,6 +3,7 @@ package br.com.lpweb.sistemaDeMusica.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -15,23 +16,23 @@ public class Album {
       @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
       @Column(name = "album_id")
       Integer id;
-      @NotEmpty
+      @NotBlank
       String nome;
 
       @NotNull
       Integer ano;
 
+      @NotEmpty
       @ManyToMany(cascade = CascadeType.ALL)
       @JoinTable( name = "album_musica",
       joinColumns = @JoinColumn(name = "id_album"),
           inverseJoinColumns = @JoinColumn(name = "id_musica"))
       List<Musica> musicas;
 
-      @ManyToMany (mappedBy = "albums")
+      @NotEmpty
+      @ManyToMany (mappedBy = "albums", cascade = CascadeType.ALL)
       @JsonIgnore
       List<Artista> participantes;
-
-
 
       @JsonIgnore
       public Integer getDuracaoTotalAbum(){

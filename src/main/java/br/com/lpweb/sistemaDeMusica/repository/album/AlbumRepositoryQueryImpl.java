@@ -44,7 +44,8 @@ public class AlbumRepositoryQueryImpl implements AlbumRepositoryQuery {
             // 4. monta a consulta com as restrições
             cQuery.select(albumRoot)
                     .where(restricoes )
-                    .orderBy( cBuilder.desc(albumRoot.get("ano")) );
+                    .orderBy( cBuilder.desc(albumRoot.get("ano")) )
+                        .orderBy(cBuilder.desc(albumRoot.get("nome")), cBuilder.desc(albumRoot.get("ano")),cBuilder.desc(albumRoot.get("duracao")));
 
             // 5. cria e executa a consula
             TypedQuery<Album> query = manager.createQuery(cQuery);
@@ -60,17 +61,21 @@ public class AlbumRepositoryQueryImpl implements AlbumRepositoryQuery {
             List<Predicate> predicates = new ArrayList<>();
 
             if ( !StringUtils.isEmpty( filtro.getNome()) ) {
-                  // where nome like %Computador%
                   predicates.add(cBuilder.like(cBuilder.lower(albumRoot.get("nome")), "%" + filtro.getNome().toLowerCase() + "%" ) );
 
             }
 
-            if ( Objects.nonNull(filtro.getAno())) {
-                  predicates.add( cBuilder.ge( albumRoot.get("ano"), filtro.getAno()));
+            if ( Objects.nonNull(filtro.getDeAno())) {
+                  predicates.add( cBuilder.gt( albumRoot.get("ano"), filtro.getDeAno()));
             }
 
-            if( Objects.nonNull( filtro.getDuracao()) ) {
+            if ( Objects.nonNull(filtro.getAteAno())) {
+                  predicates.add( cBuilder.le( albumRoot.get("ano"), filtro.getAteAno()));
+            }
+
+            if( Objects.nonNull( filtro.getDuracao())) {
                   predicates.add( cBuilder.le(albumRoot.get("getDuracaoTotalAbum"), filtro.getDuracao()));
+
             }
 
             return predicates.toArray(new Predicate[ predicates.size() ] );

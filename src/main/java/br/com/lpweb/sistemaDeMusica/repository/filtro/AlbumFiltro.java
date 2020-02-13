@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class AlbumFiltro {
       String nome;
-      Integer ano;
+      Integer deAno;
+      Integer ateAno;
       Integer duracao;
 
 

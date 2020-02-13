@@ -5,16 +5,13 @@ import br.com.lpweb.sistemaDeMusica.model.AlbumDTO;
 import br.com.lpweb.sistemaDeMusica.model.Artista;
 import br.com.lpweb.sistemaDeMusica.repository.IAlbumRepository;
 import br.com.lpweb.sistemaDeMusica.repository.filtro.AlbumFiltro;
+import br.com.lpweb.sistemaDeMusica.service.exception.MusicaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.xml.bind.ValidationException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AlbumService {
@@ -22,6 +19,7 @@ public class AlbumService {
       private final GenericoService<Album> genericoService;
 
       private final IAlbumRepository albumRepository;
+
 
       @Autowired
       AlbumService(IAlbumRepository albumRepository) {
@@ -37,33 +35,29 @@ public class AlbumService {
 
       @Transactional(readOnly = true)
       public List<Album> recuperaAlbuns() {
-          return genericoService.todos();
+         List<Album> albuns = genericoService.todos();
+         if(albuns ==  null || albuns.isEmpty()  ){
+               new MusicaException("Nenhum album cadastrado");
+         }
+            return albuns;
       }
-
-//      @Transactional(readOnly = true)
-//      public List<AlbumDTO> ArtistaPorAlbum(String paticipante) throws ValidationException {
-//
-//           List<Album> albuns= albumRepository.findAlbumByParticipantes(paticipante);
-//           if (albuns.isEmpty()){
-//                 throw  new ValidationException("Esse Artista nao tem participacao em nenhum album! ");
-//           }
-//
-//           List<AlbumDTO> dto = new ArrayList<>();
-//            for (Album album: albuns){
-//                  dto.add(fromDTO(album));
-//            }
-//           return dto;
-//      }
 
 
       @Transactional(readOnly = true)
       public Album recuperaAlbumPor(Integer id) {
-            return genericoService.buscaPor(id);
+            Album album = genericoService.buscaPor(id);
+            if(album == null){
+                  new MusicaException("Album nao encontrado");
+            }
+            return album;
       }
 
 
       @Transactional
       public void insereAlbum(Album album) {
+            if(album == null){
+                  new MusicaException("Album invalido");
+            }
             genericoService.salva(album);
       }
 
@@ -75,13 +69,20 @@ public class AlbumService {
 
       @Transactional
       public Album atualizaAlbum(Album album, Integer id) {
-           return (Album) genericoService.atualiza(album, id);
+            if(album == null){
+                  new MusicaException("Album invalido");
+            }
+           return genericoService.atualiza(album, id);
       }
 
       public AlbumDTO fromDTO(Album album){
+            if(album == null){
+                  new MusicaException("Album invalido");
+            }
             return  AlbumDTO.builder()
                     .nome(album.getNome())
                     .ano(album.getAno()).build();
 
       }
+
 }

@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class StandardError implements Serializable {
 
     private static Long serialVersionUID = 1L;
-    int value;
     String message;
     String details;
+
 }
